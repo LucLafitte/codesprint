@@ -1,0 +1,18 @@
+<%- include('component/header.ejs') %>
+
+
+<div>
+     <select name="pets" id="selctCountry">
+        <% countries.forEach(function(country){ %>
+            <option value="<%- country.id %>"><%- country.name %></option>
+        <% }); %>
+    </select>
+    <select name="pets" id="selctClub">
+        <% clubs.forEach(function(league){ %>
+            <option value="<%- league.id %>"><%- league.name %></option>
+        <% }); %>
+    </select>
+</div>
+
+
+<%- include('component/footer.ejs') %>
