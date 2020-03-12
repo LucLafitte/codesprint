@@ -19,6 +19,8 @@
     </div>
     <script>
         function myFunction() {
+             //Désactiver le button
+            document.getElementById("play").disabled = true;
             //Generation d'un nombre pour l'equipe 1
             var equipeun = Math.floor((Math.random() * 5) + 0);
             document.getElementById("equipe1").innerHTML = equipeun;
