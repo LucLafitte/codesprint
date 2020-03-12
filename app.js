@@ -73,10 +73,6 @@ async function aleatoireNb() {
     return unNombre
     }
     
-
-    
-    
-
 // app.post("/country", function(req, res){
 //     let countryFromID = req.body.country
 //     let listeTeams = getTeams(countryFromID)
