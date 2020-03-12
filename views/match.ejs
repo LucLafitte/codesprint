@@ -1,0 +1,47 @@
+<%- include('component/header.ejs') %>
+
+<%- console.log(stateForm)-%>
+<%- console.log(random)-%>
+
+<h1>Commencer le Match !</h1>
+    <button onclick="myFunction()">Jouer !</button>
+    <!--Equipe1-->
+    <div>
+        <p id="nomEquipe1"><%- stateForm.select -></p>
+        <p id="equipe1"></p>
+        <p id="text1"></p>
+    </div>
+     <!--Equipe2-->
+    <div>
+        <p id="nomEquipe2"><%- random.select -></p>
+        <p id="equipe2"></p>
+        <p id="text2"></p>
+    </div>
+    <script>
+        function myFunction() {
+            //Generation d'un nombre pour l'equipe 1
+            var equipeun = Math.floor((Math.random() * 5) + 0);
+            document.getElementById("equipe1").innerHTML = equipeun;
+            //Generation d'un nombre pour l'equipe 2
+            var equipedeux = Math.floor((Math.random() * 5) + 0);
+            document.getElementById("equipe2").innerHTML = equipedeux;
+            //Affiche des resultat
+            //Quand l'équipe 1 gagne
+            if (equipeun > equipedeux) {
+                document.getElementById("text1").innerHTML = 'Victoire';
+                document.getElementById("text2").innerHTML = 'Perdu';
+            } 
+            //Quand l'équipe 2 gagne
+            else if (equipedeux > equipeun) {
+                document.getElementById("text1").innerHTML = 'Perdu';
+                document.getElementById("text2").innerHTML = 'Victoire';
+            } 
+            //Quand il y a égalité
+            else {
+                document.getElementById("text1").innerHTML = 'Égalité';
+                document.getElementById("text2").innerHTML = 'Égalité';
+            }
+        }
+    </script>
+
+<%- include('component/footer.ejs') %> 

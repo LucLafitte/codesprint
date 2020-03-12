@@ -1,0 +1,15 @@
+<%- include('component/header.ejs') %>
+
+<div>
+    <form action="/match" method="post">
+        <select name="teams" id="selectTeams">
+            <% stateForm.list.teams.forEach(function(team){ %>
+                <option value="<%- team.id %>"><%- team.name %></option>
+            <% }); %>
+        </select>
+        <input type="submit">
+    </form>
+</div>
+
+
+<%- include('component/footer.ejs') %>
