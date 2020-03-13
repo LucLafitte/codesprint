@@ -1,50 +1,50 @@
 <%- include('component/header.ejs') %>
+<%- console.log(stateForm)%>
+<%-//rs console.log(random)%>
 
-<%- console.log(stateForm)-%>
-<%- console.log(random)-%>
-
-<h1>Commencer le Match !</h1>
-<button id=play onclick="myFunction()">Jouer !</button>
-<button id=nouveaumatch style="visibility: hidden;" href="/index.ejs">Nouveau match !</button>
-<!--Equipe1-->
-<div>
-    <p id="nomEquipe1"><%- stateForm.select -></p>
-    <p id="equipe1"></p>
-    <p id="text1"></p>
-</div>
- <!--Equipe2-->
-<div>
-    <p id="nomEquipe2"><%- random.select -></p>
-    <p id="equipe2"></p>
-    <p id="text2"></p>
+<div id="conteneur">
+    <div class="element1">
+        <img src="" alt="">
+        <p class= "nom" id="nomEquipe1"> <% //stateForm.select.team.forEach(function(team){team.name});%></p>
+        <p class= "score" id="ScoreEquipe1"></p>
+    </div>
+    <div class="element2">
+        <p id="text"></p>
+        <button class="buttonPlay" style="display: inherit;" id="play" onclick="myFunction()">Jouer !</button>
+        <button class="buttonNm" id="nouveaumatch" style="display: none;">Nouveau match !</button>
+    </div>
+    <div class="element3">
+        <img src="" alt="">
+        <p class="nom" id="nomEquipe2"><% //stateForm.random.team.forEach(function(team){team.name});%></p>
+        <p class="score" id="scoreEquipe2"></p>
+    </div>
 </div>
 <script>
     function myFunction() {
-       //Désactiver le button
-       document.getElementById("play").disabled = true;
-       //Afficher le nouveau button
-       document.getElementById("nouveaumatch").style.visibility = "visible";
+        document.getElementById("nomEquipe1").innerHTML = stateForm.select.team.teams;
+        document.getElementById("nomEquipe2").innerHTML = stateForm.random.team;
+        //Désactiver le button
+        document.getElementById("play").style.display = "none" ;
+        //Afficher le nouveau button
+        document.getElementById("nouveaumatch").style.display = "inherit";
         //Generation d'un nombre pour l'equipe 1
         var equipeun = Math.floor((Math.random() * 5) + 0);
-        document.getElementById("equipe1").innerHTML = equipeun;
+        document.getElementById("ScoreEquipe1").innerHTML = equipeun;
         //Generation d'un nombre pour l'equipe 2
         var equipedeux = Math.floor((Math.random() * 5) + 0);
-        document.getElementById("equipe2").innerHTML = equipedeux;
+        document.getElementById("scoreEquipe2").innerHTML = equipedeux;
         //Affiche des resultat
         //Quand l'équipe 1 gagne
         if (equipeun > equipedeux) {
-            document.getElementById("text1").innerHTML = 'Victoire';
-            document.getElementById("text2").innerHTML = 'Perdu';
+            document.getElementById("text").innerHTML = 'Vous avez gagné le match !';
         } 
         //Quand l'équipe 2 gagne
         else if (equipedeux > equipeun) {
-            document.getElementById("text1").innerHTML = 'Perdu';
-            document.getElementById("text2").innerHTML = 'Victoire';
+            document.getElementById("text").innerHTML = 'Vous avez perdu le match :(';
         } 
         //Quand il y a égalité
         else {
-            document.getElementById("text1").innerHTML = 'Égalité';
-            document.getElementById("text2").innerHTML = 'Égalité';
+            document.getElementById("text").innerHTML = "Le match est fini c'est une égalité !";
         }
     }
 </script>

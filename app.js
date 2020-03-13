@@ -21,11 +21,8 @@ var stateForm = {
     },
     select:{
         team: ""
-    }
-}
-
-var random = {
-    select:{
+    },
+    random:{
         team: ""
     }
 }
@@ -45,15 +42,16 @@ app.post("/teams",function(req, res){
     })
 })
 
-
-
 app.post("/match", function(req, res){
-    console.log(req.body)
     const teamName = req.body // teamName : nom de l'équipe que l'on a sélectionné
-    console.log(teamName)
+    stateForm.select.team = teamName
+    getRandomRandomTeam().then(response => {
+        res.render("match", {stateForm: stateForm})
+    })
+    
     // stateForm.select.team = req.body.team
     // getRandomTeam().then(response => {
-    //     random.select.team = response.data.data.team // la
+    //     random.select.team = response.data.data.team
     //     res.render("match", {stateForm: stateForm, random: random})
     // })
 })
@@ -69,21 +67,27 @@ async function getTeams(countryID){
 
 async function getRandomRandomTeam(){
     const allTeam = await axios.get(`http://livescore-api.com/api-client/teams/list.json?key=APetT84BNRPwmHtw&secret=5klcbi9ORwzWGIbgyqJrzO3nFTU2BnzH`)
-    aleatoireNb();
-    return allTeam[unNombre]; // et la
+    aleatoireNb().then(response => {
+        unNombre = response
+        // res.render("match", {stateForm: stateForm})
+        let getTeam = aleatoireNb().then( number => {
+            stateForm.random.team = allTeam.data.data.teams[number].name
+        })
+    })
 }
 
-async function getTeam(teamID){
-    const team = await axios.get(`http://livescore-api.com/api-client/teams/list.json?key=APetT84BNRPwmHtw&secret=5klcbi9ORwzWGIbgyqJrzO3nFTU2BnzH`) 
-    return team; // et la
-}
+
+//async function getTeam(teamID){
+//    const team = await axios.get(`http://livescore-api.com/api-client/teams/list.json?key=APetT84BNRPwmHtw&secret=5klcbi9ORwzWGIbgyqJrzO3nFTU2BnzH`) 
+//    return team; // et la
+//}
 
 
 async function aleatoireNb() {
-    unNombre = (Math.floor((5818)*Math.random()+1));
+    unNombre = (Math.floor((30)*Math.random()+1));
     return unNombre
     }
-    
+
 // app.post("/country", function(req, res){
 //     let countryFromID = req.body.country
 //     let listeTeams = getTeams(countryFromID)
