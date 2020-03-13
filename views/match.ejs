@@ -11,7 +11,10 @@
     <div class="element2">
         <p id="text"></p>
         <button class="buttonPlay" style="display: inherit;" id="play" onclick="myFunction()">Jouer !</button>
-        <button class="buttonNm" id="nouveaumatch" style="display: none;">Nouveau match !</button>
+        
+        <a href="/">
+            <button class="buttonNm" id="nouveaumatch" style="display: none;">Nouveau match !</button>
+        </a>
     </div>
     <div class="element3">
         <img src="" alt="">
@@ -52,6 +55,8 @@
             document.getElementById("text").innerHTML = "Le match est fini c'est une égalité !";
         }
     }
+
+
 </script>
 
 <%- include('component/footer.ejs') %> 
