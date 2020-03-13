@@ -45,12 +45,17 @@ app.post("/teams",function(req, res){
     })
 })
 
+
+
 app.post("/match", function(req, res){
-    stateForm.select.team = req.body.team
-    getRandomTeam().then(response => {
-        random.select.team = response.data.data.team // la
-        res.render("match", {stateForm: stateForm, random: random})
-    })
+    console.log(req.body)
+    const teamName = req.body // teamName : nom de l'équipe que l'on a sélectionné
+    console.log(teamName)
+    // stateForm.select.team = req.body.team
+    // getRandomTeam().then(response => {
+    //     random.select.team = response.data.data.team // la
+    //     res.render("match", {stateForm: stateForm, random: random})
+    // })
 })
  
 async function getCountries(){
@@ -62,11 +67,17 @@ async function getTeams(countryID){
     return listeTeams
 }
 
-async function getRandomTeam(){
+async function getRandomRandomTeam(){
     const allTeam = await axios.get(`http://livescore-api.com/api-client/teams/list.json?key=APetT84BNRPwmHtw&secret=5klcbi9ORwzWGIbgyqJrzO3nFTU2BnzH`)
     aleatoireNb();
     return allTeam[unNombre]; // et la
 }
+
+async function getTeam(teamID){
+    const team = await axios.get(`http://livescore-api.com/api-client/teams/list.json?key=APetT84BNRPwmHtw&secret=5klcbi9ORwzWGIbgyqJrzO3nFTU2BnzH`) 
+    return team; // et la
+}
+
 
 async function aleatoireNb() {
     unNombre = (Math.floor((5818)*Math.random()+1));
@@ -88,4 +99,4 @@ async function aleatoireNb() {
 
 
 
-app.listen(3000)
+app.listen(3001)

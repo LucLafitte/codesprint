@@ -4,7 +4,7 @@
     <form action="/match" method="post">
         <select name="teams" id="selectTeams">
             <% stateForm.list.teams.forEach(function(team){ %>
-                <option value="<%- team.id %>"><%- team.name %></option>
+                <option value="<%- team.name %>"><%- team.name %></option>
             <% }); %>
         </select>
         <input type="submit">
