@@ -44,16 +44,18 @@ app.post("/teams",function(req, res){
 
 app.post("/match", function(req, res){
     const teamName = req.body // teamName : nom de l'équipe que l'on a sélectionné
-    stateForm.select.team = teamName
+    stateForm.select.team = teamName.team
     getRandomRandomTeam().then(response => {
+        console.log("********response********")
+        console.log(response)
         res.render("match", {stateForm: stateForm})
+        console.log("********USER********")
+        console.log(teamName)
+        console.log("********ROBOT********")
+        console.log(response)
+        console.log("********STATE********")
+        console.log(stateForm)
     })
-    
-    // stateForm.select.team = req.body.team
-    // getRandomTeam().then(response => {
-    //     random.select.team = response.data.data.team
-    //     res.render("match", {stateForm: stateForm, random: random})
-    // })
 })
  
 async function getCountries(){
@@ -66,22 +68,12 @@ async function getTeams(countryID){
 }
 
 async function getRandomRandomTeam(){
+    let randomTeam =""
     const allTeam = await axios.get(`http://livescore-api.com/api-client/teams/list.json?key=APetT84BNRPwmHtw&secret=5klcbi9ORwzWGIbgyqJrzO3nFTU2BnzH`)
-    aleatoireNb().then(response => {
-        unNombre = response
-        // res.render("match", {stateForm: stateForm})
-        let getTeam = aleatoireNb().then( number => {
-            stateForm.random.team = allTeam.data.data.teams[number].name
-        })
-    })
+    const result = await aleatoireNb()
+    randomTeam = allTeam.data.data.teams[result].name
+    stateForm.random.team = randomTeam
 }
-
-
-//async function getTeam(teamID){
-//    const team = await axios.get(`http://livescore-api.com/api-client/teams/list.json?key=APetT84BNRPwmHtw&secret=5klcbi9ORwzWGIbgyqJrzO3nFTU2BnzH`) 
-//    return team; // et la
-//}
-
 
 async function aleatoireNb() {
     unNombre = (Math.floor((30)*Math.random()+1));
